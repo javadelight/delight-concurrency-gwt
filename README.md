@@ -3,5 +3,6 @@
 delight-concurrency-gwt
 ===============
 
-
 Wrappers for basic Java concurrency classes.
+
+Part of [Java Delight](https://github.com/javadelight/delight-main#java-delight-suite).
