@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- Template: Source + GWT + in workspace dependencies 27.11.2010 --><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<artifactId>concurrency-gwt</artifactId>
-	<groupId>de.mxro.concurrency.gwt</groupId>
-	<version>0.0.4-SNAPSHOT</version>
+	<artifactId>delight-concurrency-gwt</artifactId>
+	<groupId>org.javadelight</groupId>
+	<version>0.0.4</version>
 	<description>GWT wrappers for basic JRE concurrency classes.</description>
-	<url>https://github.com/mxro/concurrency-gwt</url>
+	<url>https://github.com/javadelight/delight-concurrency-gwt</url>
 	<properties>
 
 		<module.gwtVersion>2.5.1</module.gwtVersion>
@@ -12,7 +12,7 @@
 			org.junit,
 			*
 		</module.importedPackages>
-		<module.exportedPackages>!de.mxro.concurrency.gwt.internal*,de.mxro.concurrency.gwt*
+		<module.exportedPackages>!delight.concurrency.gwt.internal*,delight.concurrency.gwt*
 		</module.exportedPackages>
 		<module.serviceDefinitions>
 		</module.serviceDefinitions>

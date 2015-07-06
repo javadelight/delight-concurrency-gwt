@@ -1,4 +1,4 @@
-package de.mxro.concurrency.gwt;
+package delight.concurrency.gwt;
 
 import delight.concurrency.Concurrency;
 import delight.concurrency.factories.CollectionFactory;
