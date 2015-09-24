@@ -1,5 +1,6 @@
 package delight.concurrency.gwt;
 
+import delight.async.callbacks.SimpleCallback;
 import delight.concurrency.Concurrency;
 import delight.concurrency.factories.CollectionFactory;
 import delight.concurrency.factories.ExecutorFactory;
@@ -57,7 +58,8 @@ public final class GwtConcurrencyImpl implements Concurrency {
             }
 
             @Override
-            public SimpleTimer scheduleRepeating(final int offsetInMs, final int intervallInMs, final Runnable runnable) {
+            public SimpleTimer scheduleRepeating(final int offsetInMs, final int intervallInMs,
+                    final Runnable runnable) {
 
                 final Timer timer = new Timer() {
 
@@ -95,7 +97,7 @@ public final class GwtConcurrencyImpl implements Concurrency {
                 return new SimpleExecutor() {
 
                     @Override
-                    public void shutdown(final WhenExecutorShutDown callback) {
+                    public void shutdown(final SimpleCallback callback) {
                         callback.onSuccess();
                     }
 
@@ -132,7 +134,7 @@ public final class GwtConcurrencyImpl implements Concurrency {
                 return new SimpleExecutor() {
 
                     @Override
-                    public void shutdown(final WhenExecutorShutDown callback) {
+                    public void shutdown(final SimpleCallback callback) {
                         callback.onSuccess();
                     }
 
