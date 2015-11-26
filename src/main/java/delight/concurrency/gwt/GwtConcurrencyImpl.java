@@ -20,8 +20,6 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.Timer;
 
 /**
@@ -111,13 +109,16 @@ public final class GwtConcurrencyImpl implements Concurrency {
                          * runnable);
                          */
 
-                        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                        // Scheduler.get().scheduleDeferred(new
+                        // ScheduledCommand() {
+                        //
+                        // @Override
+                        // public void execute() {
+                        // runnable.run();
+                        // }
+                        // });
 
-                            @Override
-                            public void execute() {
-                                runnable.run();
-                            }
-                        });
+                        runnable.run();
 
                         return THREAD; // only one Thread in JS
                     }
