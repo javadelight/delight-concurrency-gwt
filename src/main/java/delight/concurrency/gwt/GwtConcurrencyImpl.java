@@ -129,13 +129,16 @@ public final class GwtConcurrencyImpl implements Concurrency {
                          * runnable);
                          */
 
-                        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+                        runnable.run();
 
-                            @Override
-                            public void execute() {
-                                runnable.run();
-                            }
-                        });
+                        // Scheduler.get().scheduleDeferred(new
+                        // ScheduledCommand() {
+                        //
+                        // @Override
+                        // public void execute() {
+                        // runnable.run();
+                        // }
+                        // });
 
                         // runnable.run();
 
