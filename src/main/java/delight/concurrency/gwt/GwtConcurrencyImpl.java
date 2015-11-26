@@ -137,7 +137,7 @@ public final class GwtConcurrencyImpl implements Concurrency {
                             }
                         });
 
-                        runnable.run();
+                        // runnable.run();
 
                         return THREAD; // only one Thread in JS
                     }
