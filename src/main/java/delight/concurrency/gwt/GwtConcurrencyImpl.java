@@ -67,6 +67,7 @@ public final class GwtConcurrencyImpl implements Concurrency {
                     }
 
                 };
+
                 timer.schedule(when);
                 return new SimpleTimer() {
 
