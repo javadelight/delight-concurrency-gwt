@@ -144,11 +144,6 @@ public final class GwtConcurrencyImpl implements Concurrency {
                         // return THREAD; // only one Thread in JS
                     }
 
-                    @Override
-                    public Object getCurrentThread() {
-
-                        return THREAD;
-                    }
                 };
             }
 
@@ -176,11 +171,6 @@ public final class GwtConcurrencyImpl implements Concurrency {
                         // return THREAD; // only one Thread in JS
                     }
 
-                    @Override
-                    public Object getCurrentThread() {
-
-                        return THREAD;
-                    }
                 };
             }
 
