@@ -123,7 +123,7 @@ public final class GwtConcurrencyImpl implements Concurrency {
                     }
 
                     @Override
-                    public Object execute(final Runnable runnable) {
+                    public void execute(final Runnable runnable) {
                         /*
                          * final int delay; if (IS_CHROME) { delay = 0; } else {
                          * delay = 1; } newTimer().scheduleOnce(delay,
@@ -141,7 +141,7 @@ public final class GwtConcurrencyImpl implements Concurrency {
                         // }
                         // });
 
-                        return THREAD; // only one Thread in JS
+                        // return THREAD; // only one Thread in JS
                     }
 
                     @Override
@@ -169,11 +169,11 @@ public final class GwtConcurrencyImpl implements Concurrency {
                     }
 
                     @Override
-                    public Object execute(final Runnable runnable) {
+                    public void execute(final Runnable runnable) {
                         // newTimer().scheduleOnce(1, runnable); // too prevent
                         // too deep recursion
                         runnable.run();
-                        return THREAD; // only one Thread in JS
+                        // return THREAD; // only one Thread in JS
                     }
 
                     @Override
