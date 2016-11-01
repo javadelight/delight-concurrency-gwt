@@ -210,11 +210,6 @@ public final class GwtConcurrencyImpl implements Concurrency {
     }
 
     @Override
-    public void runLater(final Runnable runnable) {
-
-    }
-
-    @Override
     public SimpleLock newLock() {
 
         return new SimpleLock() {
