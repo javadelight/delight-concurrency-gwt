@@ -182,6 +182,16 @@ public final class GwtConcurrencyImpl implements Concurrency {
                         // return THREAD; // only one Thread in JS
                     }
 
+                    @Override
+                    public void execute(final Callable<Object> callable, final int timeout) {
+                        try {
+                            callable.call();
+                        } catch (final Exception e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }
+
                 };
             }
 
