@@ -199,7 +199,6 @@ public final class GwtConcurrencyImpl implements Concurrency {
 
                     @Override
                     public int pendingTasks() {
-b
                         return 0;
                     }
 
