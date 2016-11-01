@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.Callable;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
@@ -142,6 +143,16 @@ public final class GwtConcurrencyImpl implements Concurrency {
                         // });
 
                         // return THREAD; // only one Thread in JS
+                    }
+
+                    @Override
+                    public void execute(final Callable<Object> callable, final int timeout) {
+                        try {
+                            callable.call();
+                        } catch (final Exception e) {
+                            throw new RuntimeException(e);
+                        }
+
                     }
 
                 };
