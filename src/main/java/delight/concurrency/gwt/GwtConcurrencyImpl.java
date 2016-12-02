@@ -145,7 +145,7 @@ public final class GwtConcurrencyImpl implements Concurrency {
                     }
 
                     @Override
-                    public void execute(final Runnable runnable, final int timeout) {
+                    public void execute(final Runnable runnable, final int timeout, final Runnable onTimeout) {
                         runnable.run();
 
                     }
@@ -183,7 +183,7 @@ public final class GwtConcurrencyImpl implements Concurrency {
                     }
 
                     @Override
-                    public void execute(final Runnable runnable, final int timeout) {
+                    public void execute(final Runnable runnable, final int timeout, final Runnable onTimeout) {
                         runnable.run();
 
                     }
