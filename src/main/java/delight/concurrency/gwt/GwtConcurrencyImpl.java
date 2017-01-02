@@ -197,6 +197,12 @@ public final class GwtConcurrencyImpl implements Concurrency {
                 };
             }
 
+            @Override
+            public SimpleExecutor newParallelExecutor(final int minThreads, final int maxParallelThreads,
+                    final Object owner) {
+                return newSingleThreadExecutor(owner);
+            }
+
         };
     }
 
