@@ -31,7 +31,6 @@ import com.google.gwt.user.client.Timer;
  *
  */
 public final class GwtConcurrencyImpl implements Concurrency {
-    private static final Object THREAD = new Object();
 
     @Override
     public TimerFactory newTimer() {
@@ -124,24 +123,9 @@ public final class GwtConcurrencyImpl implements Concurrency {
 
                     @Override
                     public void execute(final Runnable runnable) {
-                        /*
-                         * final int delay; if (IS_CHROME) { delay = 0; } else {
-                         * delay = 1; } newTimer().scheduleOnce(delay,
-                         * runnable);
-                         */
 
                         runnable.run();
 
-                        // Scheduler.get().scheduleDeferred(new
-                        // ScheduledCommand() {
-                        //
-                        // @Override
-                        // public void execute() {
-                        // runnable.run();
-                        // }
-                        // });
-
-                        // return THREAD; // only one Thread in JS
                     }
 
                     @Override
