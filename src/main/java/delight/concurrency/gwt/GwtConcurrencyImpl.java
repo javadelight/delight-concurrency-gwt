@@ -7,6 +7,7 @@ import delight.concurrency.factories.ExecutorFactory;
 import delight.concurrency.factories.TimerFactory;
 import delight.concurrency.wrappers.SimpleAtomicBoolean;
 import delight.concurrency.wrappers.SimpleAtomicInteger;
+import delight.concurrency.wrappers.SimpleAtomicLong;
 import delight.concurrency.wrappers.SimpleExecutor;
 import delight.concurrency.wrappers.SimpleLock;
 import delight.concurrency.wrappers.SimpleTimer;
@@ -311,6 +312,44 @@ public final class GwtConcurrencyImpl implements Concurrency {
 
             @Override
             public int decrementAndGet() {
+                wrapped -= 1;
+                return wrapped;
+            }
+        };
+    }
+
+    @Override
+    public SimpleAtomicLong newAtomicLong(final long value) {
+
+        return new SimpleAtomicLong() {
+
+            long wrapped = value;
+
+            @Override
+            public void set(final long newValue) {
+                wrapped = newValue;
+            }
+
+            @Override
+            public long incrementAndGet() {
+                wrapped += 1;
+                return wrapped;
+            }
+
+            @Override
+            public long getAndSet(final long newValue) {
+                final long oldwrapped = wrapped;
+                wrapped = newValue;
+                return oldwrapped;
+            }
+
+            @Override
+            public long get() {
+                return wrapped;
+            }
+
+            @Override
+            public long decrementAndGet() {
                 wrapped -= 1;
                 return wrapped;
             }
