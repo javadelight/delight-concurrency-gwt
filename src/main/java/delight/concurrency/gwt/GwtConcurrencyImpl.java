@@ -23,6 +23,7 @@ import java.util.Set;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
 
 /**
@@ -104,9 +105,6 @@ public final class GwtConcurrencyImpl implements Concurrency {
         };
     }
 
-    // public final static boolean IS_CHROME =
-    // Window.Navigator.getUserAgent().toLowerCase().contains("chrome");
-
     @Override
     public ExecutorFactory newExecutor() {
 
@@ -124,14 +122,23 @@ public final class GwtConcurrencyImpl implements Concurrency {
 
                     @Override
                     public void execute(final Runnable runnable) {
+                        run(runnable);
 
-                        runnable.run();
+                    }
 
+                    private void run(final Runnable runnable) {
+                        Scheduler.get().scheduleDeferred(new Command() {
+
+                            @Override
+                            public void execute() {
+                                runnable.run();
+                            }
+                        });
                     }
 
                     @Override
                     public void execute(final Runnable runnable, final int timeout, final Runnable onTimeout) {
-                        runnable.run();
+                        run(runnable);
 
                     }
 
