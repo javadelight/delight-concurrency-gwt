@@ -111,8 +111,36 @@ public final class GwtConcurrencyImpl implements Concurrency {
         return new ExecutorFactory() {
 
             @Override
+            public SimpleExecutor newAsyncExecutor(final Object owner) {
+
+                return createExecutor(true);
+            }
+
+            @Override
             public SimpleExecutor newSingleThreadExecutor(final Object owner) {
 
+                return createExecutor(false);
+            }
+
+            @Override
+            public SimpleExecutor newParallelExecutor(final int maxParallelThreads, final Object owner) {
+
+                return createExecutor(false);
+            }
+
+            @Override
+            public SimpleExecutor newImmideateExecutor() {
+
+                return createExecutor(false);
+            }
+
+            @Override
+            public SimpleExecutor newParallelExecutor(final int minThreads, final int maxParallelThreads,
+                    final Object owner) {
+                return createExecutor(false);
+            }
+
+            private SimpleExecutor createExecutor(final boolean async) {
                 return new SimpleExecutor() {
 
                     @Override
@@ -127,13 +155,19 @@ public final class GwtConcurrencyImpl implements Concurrency {
                     }
 
                     private void run(final Runnable runnable) {
-                        Scheduler.get().scheduleDeferred(new Command() {
 
-                            @Override
-                            public void execute() {
-                                runnable.run();
-                            }
-                        });
+                        if (!async) {
+                            runnable.run();
+                        } else {
+
+                            Scheduler.get().scheduleDeferred(new Command() {
+
+                                @Override
+                                public void execute() {
+                                    runnable.run();
+                                }
+                            });
+                        }
                     }
 
                     @Override
@@ -148,51 +182,6 @@ public final class GwtConcurrencyImpl implements Concurrency {
                     }
 
                 };
-            }
-
-            @Override
-            public SimpleExecutor newParallelExecutor(final int maxParallelThreads, final Object owner) {
-
-                return newSingleThreadExecutor(owner);
-            }
-
-            @Override
-            public SimpleExecutor newImmideateExecutor() {
-
-                return new SimpleExecutor() {
-
-                    @Override
-                    public void shutdown(final SimpleCallback callback) {
-                        callback.onSuccess();
-                    }
-
-                    @Override
-                    public void execute(final Runnable runnable) {
-                        // newTimer().scheduleOnce(1, runnable); // too prevent
-                        // too deep recursion
-                        runnable.run();
-                        // return THREAD; // only one Thread in JS
-                    }
-
-                    @Override
-                    public void execute(final Runnable runnable, final int timeout, final Runnable onTimeout) {
-                        runnable.run();
-
-                    }
-
-                    @Override
-                    public int pendingTasks() {
-
-                        return 0;
-                    }
-
-                };
-            }
-
-            @Override
-            public SimpleExecutor newParallelExecutor(final int minThreads, final int maxParallelThreads,
-                    final Object owner) {
-                return newSingleThreadExecutor(owner);
             }
 
         };
