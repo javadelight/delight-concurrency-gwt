@@ -1,17 +1,5 @@
 package delight.concurrency.gwt;
 
-import delight.async.callbacks.SimpleCallback;
-import delight.concurrency.Concurrency;
-import delight.concurrency.factories.CollectionFactory;
-import delight.concurrency.factories.ExecutorFactory;
-import delight.concurrency.factories.TimerFactory;
-import delight.concurrency.wrappers.SimpleAtomicBoolean;
-import delight.concurrency.wrappers.SimpleAtomicInteger;
-import delight.concurrency.wrappers.SimpleAtomicLong;
-import delight.concurrency.wrappers.SimpleExecutor;
-import delight.concurrency.wrappers.SimpleLock;
-import delight.concurrency.wrappers.SimpleTimer;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,6 +13,19 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Timer;
+
+import delight.async.callbacks.SimpleCallback;
+import delight.concurrency.Concurrency;
+import delight.concurrency.factories.CollectionFactory;
+import delight.concurrency.factories.ExecutorFactory;
+import delight.concurrency.factories.TimerFactory;
+import delight.concurrency.wrappers.SimpleAtomicBoolean;
+import delight.concurrency.wrappers.SimpleAtomicInteger;
+import delight.concurrency.wrappers.SimpleAtomicLong;
+import delight.concurrency.wrappers.SimpleExecutor;
+import delight.concurrency.wrappers.SimpleLock;
+import delight.concurrency.wrappers.SimpleReadWriteLock;
+import delight.concurrency.wrappers.SimpleTimer;
 
 /**
  * GWT implementation of basic concurrency classes.
@@ -210,7 +211,30 @@ public final class GwtConcurrencyImpl implements Concurrency {
         };
     }
 
+    
+    
     @Override
+	public SimpleReadWriteLock newReadWriteLock() {
+		
+    	final SimpleLock lock = newLock();
+    	
+		return new SimpleReadWriteLock() {
+			
+			@Override
+			public SimpleLock writeLock() {
+				
+				return lock;
+			}
+			
+			@Override
+			public SimpleLock readLock() {
+				
+				return lock;
+			}
+		};
+	}
+
+	@Override
     public CollectionFactory newCollection() {
 
         return new CollectionFactory() {
