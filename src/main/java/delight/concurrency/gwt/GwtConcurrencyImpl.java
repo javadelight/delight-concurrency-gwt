@@ -260,6 +260,13 @@ public final class GwtConcurrencyImpl implements Concurrency {
                 return new HashSet<ItemType>();
             }
 
+			@Override
+			public <KeyType, ValueType> Map<KeyType, ValueType> newWeakHashMap(Class<KeyType> keyType,
+					Class<ValueType> valueType) {
+				
+				return new HashMap<KeyType, ValueType>();
+			}
+
         };
     }
 
